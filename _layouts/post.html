@@ -12,16 +12,8 @@
 {% include browser-upgrade.html %}
 {% include navigation.html %}
 
-{% if page.image.feature %}
-<div class="entry-header">
-    <img src="{{ site.url }}/images/{{ page.image.feature }}" alt="{{ page.title }}">
-  </div><!-- /.entry-image -->
-</div><!-- /.entry-header -->
-{% endif %}
-
 <div id="main" role="main">
   <article class="hentry">
-
     <div class="entry-content">
       {{ content }}
       <footer class="entry-meta">

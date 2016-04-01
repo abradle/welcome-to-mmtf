@@ -1,7 +1,10 @@
 # Menu navigation links
 
-- title: Theme Setup
-  url: /theme-setup/
+- title: Quick Example
+  url: /examples
 
-- title: External Link
-  url: http://mademistakes.com
+- title: HitHub Java Repository
+  url: https://github.com/rcsb/mmtf-java/
+
+- title: HitHub JavaScript Repository
+  url: https://github.com/rcsb/mmtf-javascript/

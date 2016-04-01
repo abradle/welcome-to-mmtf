@@ -12,11 +12,19 @@
 {% include browser-upgrade.html %}
 {% include navigation.html %}
 
+{% if page.image.feature %}
+<div class="entry-header">
+  <div class="entry-image">
+    <img src="{{ site.url }}/images/{{ page.image.feature }}" alt="{{ page.title }}">
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+{% endif %}
+
 <div id="main" role="main">
   <article class="hentry">
     <header class="header-title">
       <div class="header-title-wrap">
-        
+        <h1 class="entry-title">{{ page.title }}</h1>
         {% if site.reading_time %}
         <p class="entry-reading-time">
           <i class="fa fa-clock-o"></i>
