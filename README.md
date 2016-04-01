@@ -1,1 +1,1 @@
-# Welcome to MMTF Theme
+# Welcome to MMTF
