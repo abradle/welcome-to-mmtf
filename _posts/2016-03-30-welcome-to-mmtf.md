@@ -28,7 +28,7 @@ For large-scale structural calculations such as geometric queries or structural 
 * Review the [specification] [spec]
 * Access a PDB structure in MMTF [using RESTful API] [apiexamples]
 * Work through [examples] [readme]
-* Explore source code:  
+* Explore the source code:  
  -- [java]  
  -- [javascript]  
 
