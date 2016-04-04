@@ -32,12 +32,11 @@ layout: page
                   if( this.status === 200 || this.status === 304 || this.status === 0 ){
 
                       var raw = decodeMsgpack( new Uint8Array( this.response ) );
-                      var t1 = performance.now();
                       var structure = decodeMmtf( raw );
-                      var t2 = performance.now();
+                      var t = performance.now();
 
                       var info = {
-                          decodeTimeMs: formatMilliseconds(t2 - t0),
+                          totalTimeMs: formatMilliseconds(t - t0),
                       };
                       currentStructure = new SimpleStructure( structure );
 
