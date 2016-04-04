@@ -31,12 +31,15 @@ layout: page
               xhr.addEventListener( "load", function(){
                   if( this.status === 200 || this.status === 304 || this.status === 0 ){
 
+                      var t1 = performance.now();
+
                       var raw = decodeMsgpack( new Uint8Array( this.response ) );
                       var structure = decodeMmtf( raw );
-                      var t = performance.now();
+                      var t2 = performance.now();
 
                       var info = {
-                          totalTimeMs: formatMilliseconds(t - t0),
+                          downloadTimeMs: formatMilliseconds(t1 - t0),
+                          decodeTimeMs: formatMilliseconds(t2 - t1),
                       };
                       currentStructure = new SimpleStructure( structure );
 
