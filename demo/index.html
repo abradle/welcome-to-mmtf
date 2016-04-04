@@ -4,42 +4,49 @@ layout: page
 
 <!doctype html>
 <html>
-<head>
-  <script src={{ site.url }}"/assets/js/mmtf/utils.js"></script>
-  <script src={{ site.url }}"/assets/js/mmtf/structure.js"></script>
-  <script src={{ site.url }}"/assets/js/mmtf/mmtf-decode.js"></script>
-
+ <head>
+  <script src="{{ site.url }}/assets/js/mmtf/utils.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/structure.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/mmtf-decode-helpers.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/mmtf-decode.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/msgpack-decode.js"></script>
   <script>
           var currentStructure;
           function clear(){
               document.getElementById( "stats" ).innerHTML = "";
-              document.getElementById( "atomInfo" ).innerHTML = "";
+              document.getElementById( "info" ).innerHTML = "";
           }
           function error( msg ){
               document.getElementById( "stats" ).innerHTML = msg || error;
-              document.getElementById( "atomInfo" ).innerHTML = "";
+              document.getElementById( "info" ).innerHTML = "";
           }
-          function loadStructure( pdbid, backboneOnly ){
+          function loadStructure( pdbid ){
+
               var xhr = new XMLHttpRequest();
               var t0 = performance.now();
 
-              var baseUrl;
-              if( backboneOnly ){
-                  baseUrl = "http://mmtf.rcsb.org/backbone/";
-              }else{
-                  baseUrl = "http://mmtf.rcsb.org/full/";
-              }
+              var baseUrl = "http://mmtf.rcsb.org/full/";
               var pdburl = baseUrl+pdbid;
 
               xhr.addEventListener( "load", function(){
                   if( this.status === 200 || this.status === 304 || this.status === 0 ){
-                      var d = decodeSupervised( this.response, true );
+
+                      var raw = decodeMsgpack( new Uint8Array( this.response ) );
                       var t1 = performance.now();
-                      currentStructure = new SimpleStructure( d.structure );
-                      var stats = getStats( currentStructure, d.info );
-                      stats.overallTimeMs = t1 - t0;
-                      showStats( stats, "stats" );
-                      showRandomAtomInfo( currentStructure, "atomInfo" );
+                      var structure = decodeMmtf( raw );
+                      var t2 = performance.now();
+
+                      var info = {
+                          decodeTimeMs: formatMilliseconds(t2 - t0),
+                      };
+                      currentStructure = new SimpleStructure( structure );
+
+                      printObject( info, "stats" );
+                      var chains = {
+                        numChains: structure.numChains
+                      };
+                      printObject( chains, "info" );
+
                   }else{
                       error( "error loading" );
                   }
@@ -51,18 +58,11 @@ layout: page
           }
           document.addEventListener( "DOMContentLoaded", function(){
 
-              var backboneOnlyInput = document.getElementById( "backboneOnlyInput" );
-              backboneOnlyInput.addEventListener( "change", function(){
-                  if( pdbidInput.value ){
-                      loadStructure( pdbidInput.value, backboneOnlyInput.checked );
-                  }
-              } );
-
               var pdbidInput = document.getElementById( "pdbidInput" );
               pdbidInput.addEventListener( "keypress", function( e ){
                   if( e.keyCode === 13 ){
                       if( pdbidInput.value ){
-                          loadStructure( pdbidInput.value, backboneOnlyInput.checked );
+                          loadStructure( pdbidInput.value );
                       }else{
                           clear();
                       }
@@ -71,15 +71,10 @@ layout: page
               var pdbidButton = document.getElementById( "pdbidButton" );
               pdbidButton.addEventListener( "click", function(){
                   if( pdbidInput.value ){
-                      loadStructure( pdbidInput.value, backboneOnlyInput.checked );
+                      loadStructure( pdbidInput.value );
                   }else{
                       clear();
                   }
-
-              } );
-              var atomInfoButton = document.getElementById( "atomInfoButton" );
-              atomInfoButton.addEventListener( "click", function(){
-                  showRandomAtomInfo( currentStructure, "atomInfo" );
               } );
           } );
       </script>
@@ -90,20 +85,10 @@ layout: page
         PDB ID:
         <input type="text" id="pdbidInput"></input>
         <button id="pdbidButton">get</button>
-        <input type="checkbox" id="backboneOnlyInput"></input>Backbone only
 
-        <div id="stats"></div>
-
+        <div style="margin-top: .8em;"id="stats"></div>
         <br/>
-
-        <div>
-            Random Atom Info
-            <button id="atomInfoButton">show</button>
-        </div>
-
-        <br/>
-
-        <div id="atomInfo"></div>
+        <div id="info"></div>
     </div>
 </body>
 </html>

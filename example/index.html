@@ -93,13 +93,14 @@ layout: page
       }
 
   </script>
+  Service API provides programmatic access to PDB structures in MMTF format.
+  You can interact with the service by making HTTP requests to our service.
+  With every request you must send an URL with the following parameters: </br>
+  <i> http://mmtf.rcsb.org/full/4cup</i> <br/>
 
-  This example gives a quick overview on how to use RESTful API to get and decode a PDB structure in the MMTF fromat.<br/>
+  This will return an encoded PDB structure as a msgpack bin.
+  This example shows how to decode a PDB structure and get a number of chains from the decoded mmtf object:<br/>
   <br/>
-
-  PDB structures in MMTF format are exposed to programmatically access via an URL such as <i> http://mmtf.rcsb.org/full/4cup</i> <br/>
-
-  This will return an encoded structure as a msgpack bin. To decode and access the structural data from the decoded mmtf object:
 
 <ul id="tabs">
   <li><a href="#tab1">JavaScript</a></li>
@@ -109,15 +110,22 @@ layout: page
 <div class="tabContent" id="tab1">
   <div style="background: #ffffff; overflow:auto;width:auto;padding:.2em .6em; font-size: 80%;">
     <pre style="margin-bottom: 0;font-size:larger;">
-    <span style="color: #008800; font-weight: bold">var</span> mmtfObject <span style="color: #333333">=</span> decodeMmtf( bin );
+    <span style="color: #008800; font-weight: bold">var</span> raw <span style="color: #333333">=</span> decodeMsgpack( new Uint8Array( bin ) );
+    <span style="color: #008800; font-weight: bold">var</span> mmtfObject <span style="color: #333333">=</span> decodeMmtf( raw );
     <span style="color: #008800; font-weight: bold">var</span> structure <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> SimpleStructure( mmtfObject );
+    <span style="color: #008800; font-weight: bold">var</span> numChains <span style="color: #333333">=</span> structure.numChains;
     </pre>
  </div>
 </div>
 
 <div class="tabContent" id="tab2">
-  <div>
-    <p>This is tab 2</p>
+  <div style="background: #ffffff; overflow:auto;width:auto;padding:.2em .6em;font-size: 80%;">
+    <pre style="margin-bottom: 0; font-size:larger;">
+      HandleIO handleIO <span style="color: #333333">=</span><span style="color: #008800; font-weight: bold"> new</span> HandleIO<span style="color: #333333">();</span>
+      DataApiInterface dataApi <span style="color: #333333">=</span> handleIO<span style="color: #333333">.</span><span style="color: #0000CC">getDataApiFromUrlOrFile</span><span style="color: #333333">(</span><span>&quot;4cup&quot;</span><span style="color: #333333">);</span>
+      <span style="color: #008800; font-weight: bold">int</span> numChains <span style="color: #333333">=</span> dataApi<span style="color: #333333">.</span><span style="color: #0000CC">getNumChains</span><span style="color: #333333">();</span>
+
+    </pre>
   </div>
 </div>
 

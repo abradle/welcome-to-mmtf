@@ -3,14 +3,6 @@
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
 
-import decodeMsgpack from "./msgpack-decode.js";
-
-import {
-    getUint8View, getInt8View, getInt16, getInt32, getInt32View,
-    decodeFloat, decodeRunLength, decodeDelta, decodeSplitListDelta,
-    decodeFloatSplitList, decodeFloatRunLength
-} from "./mmtf-decode-helpers.js";
-
 function decodeMmtf( binOrDict, params ){
 
     params = params || {};
@@ -173,5 +165,3 @@ function decodeMmtf( binOrDict, params ){
     return outputDict;
 
 }
-
-export default decodeMmtf;
