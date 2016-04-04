@@ -15,11 +15,13 @@ The **M**acro**m**olecular **T**ransmission **F**ormat (MMTF) is a compact binar
 
 #### How can I use MMTF?
 
-For visualization and interactive analysis of large PDB structures:  
+* For visualization and interactive analysis of large PDB structures:  
 
-![usecase1]({{ site.url }}/assets/1.png)
+![usecase1]({{ site.url }}/assets/1.png)  
 
-For large-scale structural calculations such as geometric queries or structural comparisons over entire PDB archive:  
+<br />
+
+* For large-scale structural calculations such as geometric queries or structural comparisons over the entire PDB archive:  
 
 ![usecase2]({{ site.url }}/assets/2.png)
 
