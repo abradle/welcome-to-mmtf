@@ -55,4 +55,4 @@ Apache License, Version 2.0
    [git-repo-url]: <git@github.com:rcsb/mmtf-java.git>
    [readme]: <https://github.com/rcsb/mmtf-java/blob/master/README.md>
    [spec]: <https://github.com/rcsb/mmtf/blob/master/spec.md>
-   [apiexamples]: <>
+   [apiexamples]: <https://github.com/rcsb/mmtf-javascript/#api>

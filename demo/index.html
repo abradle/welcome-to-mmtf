@@ -44,10 +44,11 @@ layout: page
                       currentStructure = new SimpleStructure( structure );
 
                       printObject( info, "stats" );
-                      var chains = {
-                        numChains: structure.numChains
-                      };
-                      printObject( chains, "info" );
+
+                      //var chains = {
+                      //  numChains: structure.numChains
+                      //};
+                      //printObject( chains, "info" );
 
                   }else{
                       error( "error loading" );
@@ -84,7 +85,11 @@ layout: page
 </head>
 <body>
   <div>
-        <p>This demo shows how to get a number of chains from a PDB structure.</p>
+    <div style="font-size:larger; font-weight: bold; padding-bottom: 0.6em;">MMTF Demo</div>
+        <p>
+          You can access PDB structures in MMTF format by making HTTP requests to our RESTful service.
+          This short demo shows how fast it is to download and decode a PDB structure in MMTF fromat.
+        </p>
         <p>
         PDB ID:
         <input type="text" id="pdbidInput"></input>
