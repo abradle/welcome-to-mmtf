@@ -1,0 +1,103 @@
+---
+layout: page
+---
+
+<!doctype html>
+<html>
+ <head>
+  <script src="{{ site.url }}/assets/js/mmtf/utils.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/structure.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/mmtf-decode-helpers.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/mmtf-decode.js"></script>
+  <script src="{{ site.url }}/assets/js/mmtf/msgpack-decode.js"></script>
+  <script>
+          var currentStructure;
+          function clear(){
+              document.getElementById( "stats" ).innerHTML = "";
+              document.getElementById( "info" ).innerHTML = "";
+          }
+          function error( msg ){
+              document.getElementById( "stats" ).innerHTML = msg || error;
+              document.getElementById( "info" ).innerHTML = "";
+          }
+          function loadStructure( pdbid ){
+
+              var xhr = new XMLHttpRequest();
+              var t0 = performance.now();
+
+              var baseUrl = "http://mmtf.rcsb.org/full/";
+              var pdburl = baseUrl+pdbid;
+
+              xhr.addEventListener( "load", function(){
+                  if( this.status === 200 || this.status === 304 || this.status === 0 ){
+
+                      var t1 = performance.now();
+
+                      var raw = decodeMsgpack( new Uint8Array( this.response ) );
+                      var structure = decodeMmtf( raw );
+                      var t2 = performance.now();
+
+                      var info = {
+                          downloadTimeMs: formatMilliseconds(t1 - t0),
+                          decodeTimeMs: formatMilliseconds(t2 - t1),
+                      };
+                      currentStructure = new SimpleStructure( structure );
+
+                      printObject( info, "stats" );
+
+                      //var chains = {
+                      //  numChains: structure.numChains
+                      //};
+                      //printObject( chains, "info" );
+
+                  }else{
+                      error( "error loading" );
+                  }
+              }, true );
+              xhr.addEventListener( "error", function(){ error( "error loading" ) }, true );
+              xhr.responseType = "arraybuffer";
+              xhr.open( "GET", pdburl );
+              xhr.send();
+          }
+          document.addEventListener( "DOMContentLoaded", function(){
+
+              var pdbidInput = document.getElementById( "pdbidInput" );
+              pdbidInput.addEventListener( "keypress", function( e ){
+                  if( e.keyCode === 13 ){
+                      if( pdbidInput.value ){
+                          loadStructure( pdbidInput.value );
+                      }else{
+                          clear();
+                      }
+                  }
+              } );
+              var pdbidButton = document.getElementById( "pdbidButton" );
+              pdbidButton.addEventListener( "click", function(){
+                  if( pdbidInput.value ){
+                      loadStructure( pdbidInput.value );
+                  }else{
+                      clear();
+                  }
+              } );
+          } );
+      </script>
+
+</head>
+<body>
+  <div>
+    <div style="font-size:larger; font-weight: bold; padding-bottom: 0.6em;">MMTF Demo</div>
+        <p>
+          You can access PDB structures in MMTF format by making HTTP requests to our RESTful service.
+          This short demo shows how fast it is to download and decode a PDB structure in MMTF fromat.
+        </p>
+        <p>
+        PDB ID:
+        <input type="text" id="pdbidInput"></input>
+        <button id="pdbidButton">get</button>
+      </p>
+        <div style="margin-top: .8em;"id="stats"></div>
+        <br/>
+        <div id="info"></div>
+    </div>
+</body>
+</html>

@@ -15,11 +15,13 @@ The **M**acro**m**olecular **T**ransmission **F**ormat (MMTF) is a new compact b
 
 #### How can I use MMTF?
 
-For visualization and interactive analysis of large PDB structures:  
+* For visualization and interactive analysis of large PDB structures:  
 
-![usecase1]({{ site.url }}/assets/1.png)
+![usecase1]({{ site.url }}/assets/1.png)  
 
-For large-scale structural calculations such as geometric queries or structural comparisons over entire PDB archive:  
+<br />
+
+* For large-scale structural calculations such as geometric queries or structural comparisons over the entire PDB archive:  
 
 ![usecase2]({{ site.url }}/assets/2.png)
 
@@ -28,7 +30,7 @@ For large-scale structural calculations such as geometric queries or structural 
 * Review the [specification] [spec]
 * Access a PDB structure in MMTF [using RESTful API] [apiexamples]
 * Work through [examples] [readme]
-* Explore source code:  
+* Explore the source code:  
  -- [java]  
  -- [javascript]  
 
@@ -53,4 +55,4 @@ Apache License, Version 2.0
    [git-repo-url]: <git@github.com:rcsb/mmtf-java.git>
    [readme]: <https://github.com/rcsb/mmtf-java/blob/master/README.md>
    [spec]: <https://github.com/rcsb/mmtf/blob/master/spec.md>
-   [apiexamples]: <>
+   [apiexamples]: <https://github.com/rcsb/mmtf-javascript/#api>

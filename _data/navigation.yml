@@ -1,10 +1,7 @@
 # Menu navigation links
 
-- title: Quick Example
-  url: /examples
-
-- title: HitHub Java Repository
+- title: GitHub Java Repo
   url: https://github.com/rcsb/mmtf-java/
 
-- title: HitHub JavaScript Repository
+- title: GitHub JavaScript Repo
   url: https://github.com/rcsb/mmtf-javascript/
