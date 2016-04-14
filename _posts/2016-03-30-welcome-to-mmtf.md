@@ -10,7 +10,7 @@ The **M**acro**m**olecular **T**ransmission **F**ormat (MMTF) is a new compact b
 #### What are the benefits of using structures in MMTF?
 
 * **Small:** the entire PDB can be stored in less than 7GB. Meaning it can fit into RAM on a Desktop machine.
-* **Fast:** the viral capsid (PDB code: 3J3Q) can be loaded and parsed in seconds in a web-broweser
+* **Fast:** the largest structures in the PDB can be loaded and parsed in seconds in a web browser.
 * **Useful:** a simple, well documented API to the data is provided. Further, the format is extensible and contains the information required to understand the structure (e.g. bonding information).
 
 #### How can I use MMTF?
