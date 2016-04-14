@@ -5,13 +5,13 @@ date:   2016-04-01
 
 ## What is MMTF?
 
-The **M**acro**m**olecular **T**ransmission **F**ormat (MMTF) is a compact binary format to represent biomolecular structures from Protein Data Bank (PDB). It holds the sequence information, atomic coordinates, bonds, biological assembly information, secondary structure elements and auxiliary metadata. The format is optimized for efficient transmission over the Internet and demonstrate fast speed of decoding and parsing. In addition, the format aims to be easy to understand, use and integrate into development projects that will facilitate its dissemination.
+The **M**acro**m**olecular **T**ransmission **F**ormat (MMTF) is a new compact binary format to transmit and store biomolecular structural data quickly and accurately.  
 
 #### What are the benefits of using structures in MMTF?
 
-* **Speed:** efficient access to PDB structures over the Internet for laptop/desktop and mobile applications.
-* **Compactness:** small size reduces your bandwidth needs and allows in memory management of large structures enabling to overcome the storage-based performance bottleneck in structural bioinformatics analysis.
-* **Utility:** it has a simple API, open source libraries and good documentation that makes it easy to integrate into your molecular visualization or structural analysis applications; it contains precalculated information such as secondary structure, number and order of chemical bonds useful in various analysis; it is easily extendable to include custom fields.
+* **Small:** the entire PDB can be stored in less than 7GB. Meaning it can fit into RAM on a Desktop machine.
+* **Fast:** the viral capsid (PDB code: 3J3Q) can be loaded and parsed in seconds in a web-broweser
+* **Useful:** a simple, well documented API to the data is provided. Further, the format is extensible and contains the information required to understand the structure (e.g. bonding information).
 
 #### How can I use MMTF?
 
